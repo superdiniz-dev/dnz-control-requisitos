@@ -35,6 +35,13 @@ rede pode ter sua própria aparência/comportamento no app, configurado no níve
 citado no hub (`contexto/produto.md`): "Superdiniz" é um `GrupoEmpresa`, e a configuração
 visual/funcional dele é o que muda de uma rede para outra.
 
+A personalização por `GrupoEmpresa` vai além de um tema dentro de um app compartilhado. Confirmado
+em 2026-09-17, a rede pode ter:
+
+- **Logo e cores** próprios no app.
+- **App próprio publicado na loja**, com nome e ícone da rede.
+- **Domínio próprio na web** (ex.: `financeiro.superdiniz.com.br`), com a marca da rede.
+
 ## Relação com multi-tenancy
 
 Isso é o desenho concreto da decisão de multi-tenancy que estava em aberto no hub
@@ -46,9 +53,11 @@ como tenant de exemplo) é, neste modelo, um `GrupoEmpresa`.
 
 - Existe alguma operação ou relatório no nível do `GrupoEmpresa` (consolidado entre empresas da
   rede), ou tudo fica sempre no nível de `Empresa`?
-- Quais parâmetros exatos entram na configuração visual/funcional por `GrupoEmpresa` (cores/logo?
-  nome exibido? funcionalidades habilitadas/desabilitadas?) — levantado agora, nada detalhado
-  ainda.
+- Parâmetros **funcionais** por `GrupoEmpresa` (funcionalidades habilitadas/desabilitadas?) —
+  nada detalhado ainda. A parte visual está acima.
+- App próprio na loja: publicado na conta de desenvolvedor do DNZ Control ou na da própria rede?
+  Toda rede ganha app próprio, ou só algumas, com as demais usando um app padrão DNZ Control?
+- Domínio próprio: obrigatório, ou a rede pode usar um endereço padrão do DNZ Control?
 
 ## Impacto (a confirmar quando o modelo fechar)
 
