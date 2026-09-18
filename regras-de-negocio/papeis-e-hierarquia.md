@@ -34,7 +34,10 @@
   [`exclusao-logica.md`](exclusao-logica.md).
 - **A princípio, Gerente e Diretoria usam a mesma interface** — mesmas telas/menus. A diferença
   entre os dois papéis é só **escopo de dado** (quais `Empresa` cada um enxerga), não telas ou
-  opções exclusivas de um papel. Confirmado em 2026-09-11; não fechado como definitivo.
+  opções exclusivas de um papel. Confirmado em 2026-09-11; não fechado como definitivo. Aplicação
+  em 2026-09-18: **só a Diretoria cadastra categoria da rede**, porque o catálogo é dado do
+  `GrupoEmpresa`, fora do escopo do Gerente — ver
+  [`dados-do-lancamento.md`](dados-do-lancamento.md), "Categoria".
 
 ## Em aberto — a aprofundar depois
 

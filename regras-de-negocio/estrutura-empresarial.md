@@ -51,8 +51,9 @@ como tenant de exemplo) é, neste modelo, um `GrupoEmpresa`.
 
 ## Em aberto — a aprofundar depois
 
-- Existe alguma operação ou relatório no nível do `GrupoEmpresa` (consolidado entre empresas da
-  rede), ou tudo fica sempre no nível de `Empresa`?
+- Existe alguma **operação** no nível do `GrupoEmpresa`, além do catálogo de categorias da rede?
+  (Relatório já respondido em 2026-09-18: pode consolidar qualquer conjunto de empresas do escopo
+  de quem gera, inclusive a rede inteira — ver [`relatorios.md`](relatorios.md).)
 - Parâmetros **funcionais** por `GrupoEmpresa` (funcionalidades habilitadas/desabilitadas?) —
   nada detalhado ainda. A parte visual está acima.
 - App próprio na loja: publicado na conta de desenvolvedor do DNZ Control ou na da própria rede?
