@@ -15,7 +15,7 @@ verdade para a visão de produto e regras de negócio em si, mesmo depois de mad
 
 ## Onde paramos — retomar aqui na próxima sessão
 
-**Última sessão: 2026-09-18.** Fechamos todo o "Em aberto" de
+**Última sessão: 2026-09-18 (virou 19).** Fechamos todo o "Em aberto" de
 [`regras-de-negocio/dados-do-lancamento.md`](regras-de-negocio/dados-do-lancamento.md) e boa parte
 do de [`regras-de-negocio/lancamentos.md`](regras-de-negocio/lancamentos.md):
 
@@ -52,15 +52,75 @@ O filtro **"ver inativos" não amplia o escopo** de quem vê — `exclusao-logic
 aberto.
 
 Em `relatorios.md`: o relatório pode **consolidar qualquer conjunto de empresas** do escopo de quem
-gera (Diretoria: a rede inteira; Gerente: as empresas atribuídas).
+gera (Diretoria: a rede inteira; Gerente: as empresas atribuídas). No consolidado, a
+**transferência entre empresas da rede só sai dos totais quando as duas pontas estão na seleção**
+— reconhecida pelo CNPJ da outra ponta e mostrada numa linha à parte ("Transferências internas").
 
-**A próxima sessão começa por aqui:** no relatório consolidado, o que fazer com as transferências
-entre empresas da rede. A pergunta já foi posta, com as opções A/B/C e a recomendação (C:
-descontar só quando as duas pontas estão na seleção, em linha à parte), mas **ainda não foi
-respondida** — está no "Em aberto" de
-[`regras-de-negocio/relatorios.md`](regras-de-negocio/relatorios.md). Depois: o rastro de relatório
-já visto (mesmo arquivo), o "Em aberto" de `entidade-base.md` e o de `estrutura-empresarial.md`. O único item restante de `lancamentos.md`
-(limiar de 75% provisório) depende da escolha do leitor de comprovante (decisão pendente #2 do hub).
+Em `estrutura-empresarial.md`: **toda `Empresa` tem CNPJ, obrigatório e único dentro da rede**
+(nunca checado entre redes, para não vazar cliente de outra rede), **contando as inativas** — o
+CNPJ de empresa excluída se recupera reativando a empresa.
+
+Em `relatorios.md`: **toda geração de relatório deixa um registro** (quem, quando, empresas,
+período, filtros), **sem valores**. Não há relatório antigo guardado; os valores de um momento
+passado são reconstruídos pelo histórico imutável, se preciso. **Só a Diretoria consulta** esses
+registros (da rede inteira); o Gerente não vê nenhum. A **exportação fica marcada no próprio
+registro**, acumulando os formatos. `relatorios.md` está sem nada em aberto.
+
+Em `entidade-base.md`: a entidade base ganhou **criado por** e **atualizado por**, com cinco
+atributos no total. **Qualquer mudança conta como atualização, inclusive de status**; a
+imutabilidade vale para o conteúdo de negócio, não para a entidade base. `entidade-base.md` está
+sem nada em aberto.
+
+Em `estrutura-empresarial.md`, também em 2026-09-18:
+
+- **A Diretoria cadastra as `Empresa`**, desde a primeira; na rede de empresa única, o
+  Administrador já cria a principal.
+- **"Empresa única" é uma marcação do grupo, que só o Administrador altera.** Com ela ligada, a
+  Diretoria não cadastra outra empresa; marcar exige exatamente uma empresa ativa; marcado, o app
+  esconde tudo o que é de rede. **O caso base é uma rede de uma empresa só.**
+- **Parâmetros funcionais** nascem como mecanismo preparado para crescer, com só a empresa única
+  no MVP.
+- **App próprio na loja é opcional** (no MVP, só o app padrão DNZ Control, com a marca da rede
+  depois do login); quando vier, é publicado na conta do DNZ Control, com risco de recusa da Apple
+  registrado. **Domínio próprio na web é opcional**, já no MVP.
+- **Regime tributário da `Empresa` é opcional**; só a Diretoria altera; mudar faz as cobranças
+  federais voltarem ao padrão do novo regime.
+
+`estrutura-empresarial.md` está sem nada em aberto.
+
+Em [`regras-de-negocio/painel-inicial.md`](regras-de-negocio/painel-inicial.md) (novo): a página
+inicial é um painel da rede ou das empresas liberadas para quem vê, **filtrável como um BI** (7
+dimensões, clique no gráfico vira filtro), **abre no mês atual**, **segue as regras do relatório**,
+mostra os **5 últimos lançamentos pela data da transação** com "ver todos", e **não** entra no
+registro de geração. Sem nada em aberto.
+
+Em [`regras-de-negocio/notificacoes.md`](regras-de-negocio/notificacoes.md) (novo):
+
+- **Pagamento recorrente é só lembrete**, nunca gera lançamento; cadastro completo (cinco
+  periodicidades, só a data de início obrigatória entre os extras); vencimentos calculados da data
+  de início; quem lança na empresa cadastra; aviso antecipado (3 dias por padrão, a Diretoria
+  configura de 1 a 30) e no dia.
+- **Cobranças federais** vêm de um catálogo do Administrador por regime tributário, ligadas sozinhas
+  pelo regime da empresa e ajustáveis por quem lança; vencimento em dia não útil antecipa ou
+  prorroga conforme a cobrança (calendário de feriados nacionais do Administrador).
+- **Recebem** todos que enxergam a empresa, cada um podendo desligar para si, por empresa.
+- **Canais:** central, push no celular e e-mail (resumo diário com a marca da rede).
+- **Ciclo (2026-09-19):** quem lança na empresa **marca a ocorrência como paga**, valendo para
+  todos — só marcação, sem lançamento; os avisos restantes daquela ocorrência param de sair. Vencida sem marcação **fica
+  como "vencida" na central**, sem novos avisos. **A marcação se desfaz** por quem lança na
+  empresa, a qualquer momento, com histórico de quem marcou e desmarcou. Na própria central, cada
+  usuário tem **lida/não lida** (com contador) e **dispensar**, só para si.
+
+**A próxima sessão começa por aqui:** o ciclo da notificação fechou em
+2026-09-19. Também fecharam as pontas soltas de categoria em
+[`regras-de-negocio/dados-do-lancamento.md`](regras-de-negocio/dados-do-lancamento.md): renomear
+categoria em uso vale para todo o histórico, sem mudar a marcação de tipo, e a Diretoria oculta
+categorias da lista fixa só para a própria rede. `dados-do-lancamento.md` está sem nada em aberto. Em
+[`regras-de-negocio/notificacoes.md`](regras-de-negocio/notificacoes.md) resta só o conteúdo
+inicial do catálogo de cobranças federais: há um rascunho com fontes (2026-09-19), **a conferir
+com o contador**. Cobrança de folha (depende de ter empregado) fica fora do liga-automático e nasce
+desligada. O único item restante de `lancamentos.md` (limiar de 75% provisório) depende da escolha
+do leitor de comprovante (decisão pendente #2 do hub).
 
 A lista completa do que segue em aberto está na seção "Em aberto" de cada arquivo de regra.
 

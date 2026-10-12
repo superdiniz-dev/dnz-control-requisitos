@@ -23,6 +23,31 @@ estorno/ajuste ou uma exclusão lógica, não a edição do lançamento original
 dados corrigidos. Confirmado em 2026-09-18 — ver [`lancamentos.md`](lancamentos.md), "Como o
 estorno/ajuste corrige".
 
+## Registro de geração
+
+**Toda geração de relatório deixa um registro: quem gerou, quando, com quais empresas, período e
+filtros, sem os valores.** Confirmado em 2026-09-18. Serve para responder "quem viu o quê, e
+quando". Se um período muda depois de visto (por estorno/ajuste ou exclusão lógica), não há um
+"relatório antigo" guardado. Os valores daquele momento podem ser reconstruídos, se preciso, pelo
+histórico dos lançamentos, que nunca se apaga e tem data em cada estorno e exclusão.
+
+**Só a Diretoria consulta os registros, e vê os da rede inteira**, inclusive os relatórios gerados
+pelos Gerentes. O Gerente não vê registro nenhum, nem os próprios. O Administrador vê tudo, como em
+qualquer dado da rede (ver [`papeis-e-hierarquia.md`](papeis-e-hierarquia.md)). Confirmado em
+2026-09-18. Descartados: Gerente ver os registros das empresas atribuídas (passaria a ver o que a
+Diretoria consultou) e Gerente ver só os próprios (histórico pessoal, que não é o propósito do
+registro).
+
+**A exportação fica marcada no próprio registro da geração**, não num registro à parte: o registro
+diz se o relatório foi exportado e, se foi, em qual formato (PDF, XLS ou SVG). Confirmado em
+2026-09-18. Assim a Diretoria sabe quem tirou os números do sistema, e em que arquivo. Se o mesmo
+relatório gerado for exportado mais de uma vez, **o registro acumula todos os formatos** (ex.:
+"PDF, XLS") — nenhuma saída se perde.
+
+Descartados: **nenhum rastro** (o sistema não saberia dizer quem consultou os números) e
+**registro com os totais** (vira um quase-fechamento, descartado em 2026-09-11, e guarda valor
+financeiro fora do lançamento).
+
 ## Qual data define o período
 
 O lançamento tem duas datas de negócio: **data/hora da transação** e **data de vencimento** (ver
@@ -53,6 +78,32 @@ regra nova de acesso — o conjunto disponível é o escopo de leitura de sempre
 do hub). Descartados: só por `Empresa` no MVP (empurra a soma para planilha) e consolidado só da
 rede inteira, só para a Diretoria (deixa de fora o Gerente com várias empresas).
 
+### Transferências entre empresas da rede no consolidado
+
+**A transferência só é descontada dos totais quando as duas pontas estão na seleção.** Confirmado
+em 2026-09-18. Um PIX interno da empresa A para a B aparece como gasto em A e receita em B, sem o
+dinheiro ter saído da rede. No consolidado:
+
+- Um lançamento da categoria "Transferência entre empresas da rede" é tratado como **transferência
+  interna** quando a outra ponta — o recebedor, se é gasto; o pagador, se é receita — tem o
+  CNPJ de uma `Empresa` **que está na seleção** do relatório.
+- A transferência interna **sai dos totais de gastos e de receitas** e aparece numa **linha à
+  parte** ("Transferências internas: R$ …"), para ficar visível que o valor existiu.
+- Se a outra ponta **não** está na seleção, o lançamento conta como gasto ou receita normal: para
+  o conjunto escolhido, o dinheiro de fato entrou ou saiu. Exemplo: consolidar A e C com um PIX
+  A→B mantém o gasto de A.
+- No relatório de uma empresa só, nada muda: a transferência é gasto ou receita como qualquer
+  outro lançamento, na sua categoria.
+
+Descartados: **não descontar** (o consolidado da rede fica com gasto e receita inflados pelo
+dinheiro que só circulou dentro dela) e **descontar sempre a categoria inteira** (apaga gasto ou
+receita real quando a outra ponta está fora da seleção).
+
+**A outra ponta é reconhecida pelo CNPJ.** O CPF/CNPJ do recebedor e do pagador é obrigatório no
+lançamento (ver [`dados-do-lancamento.md`](dados-do-lancamento.md), "Obrigatoriedade"), e o CNPJ
+da `Empresa` é obrigatório e único na rede (ver
+[`estrutura-empresarial.md`](estrutura-empresarial.md)).
+
 ## Compartilhamento
 
 **Não existe compartilhamento vivo dentro do sistema** (ex.: link com token que dá acesso sem
@@ -65,24 +116,7 @@ se aplica — não há necessidade de token de acesso público a relatório.
 
 ## Em aberto — a aprofundar depois
 
-- Se um período já "visto" em relatório muda depois (por estorno/ajuste ou exclusão lógica), o
-  relatório antigo simplesmente deixa de existir como registro (só existe o relatório gerado agora,
-  com o dado atual), ou fica algum rastro de que o relatório foi visto com outros valores em outro
-  momento?
-- **Próxima dúvida do brainstorm (parada em 2026-09-18, antes da resposta).** No consolidado, o
-  que fazer com as transferências entre empresas? Opções postas: **(A)** não descontar — tudo
-  entra nos totais, o usuário filtra a categoria se quiser; **(B)** descontar sempre tudo da
-  categoria "Transferência entre empresas da rede" — erra quando a outra ponta não está na seleção
-  (consolidar A e C com transferência A→B apagaria um gasto real do conjunto); **(C)** descontar só
-  quando as duas pontas estão na seleção, reconhecendo a outra ponta pelo CPF/CNPJ do
-  recebedor/pagador ser o de uma empresa selecionada, e mostrar esses valores numa linha à parte
-  ("Transferências internas: R$ …"). Recomendação da IA: **C**. Consequência de C: depende do
-  CNPJ de cada `Empresa` estar cadastrado — se não for obrigatório, vira dúvida de
-  [`estrutura-empresarial.md`](estrutura-empresarial.md).
-  Pergunta original: o consolidado desconta automaticamente os lançamentos da categoria
-  "Transferência entre empresas da rede" (o PIX interno
-  aparece como gasto numa empresa e receita na outra sem o dinheiro ter saído da rede)? Levantado
-  em 2026-09-18 — ver [`dados-do-lancamento.md`](dados-do-lancamento.md), "Lista fixa do sistema".
+Nada em aberto por ora.
 
 ## Impacto (a confirmar quando o modelo fechar)
 
@@ -94,3 +128,8 @@ se aplica — não há necessidade de token de acesso público a relatório.
   exportação de arquivo (PDF/XLS/SVG), não por link/token dentro do sistema.
 - `dnzcontrol-api` — relatório não precisa de tabela própria de "snapshot fechado"; é uma consulta
   sobre lançamentos vigentes no período pedido. Precisa de geração de export em PDF, XLS e SVG.
+  Cada geração grava um registro (quem, quando, empresas, período, filtros), sem valores, com um
+  indicador booleano de exportação e os formatos exportados (acumulados) quando houver; consulta
+  restrita à Diretoria (e ao Administrador).
+  No consolidado, reconhece a transferência interna cruzando o CPF/CNPJ da outra ponta com o CNPJ
+  das `Empresa` selecionadas.

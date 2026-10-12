@@ -130,6 +130,22 @@ nome. Descartados: bloquear a exclusão enquanto houver uso (como lançamento de
 estorno não se editam, nunca mais seria possível excluir) e obrigar a remanejar para outra
 categoria (reescreveria o histórico financeiro, contra a regra inegociável 4 do hub).
 
+**Renomear categoria em uso: o nome novo vale para todo o histórico.** Confirmado em 2026-09-19.
+É correção de rótulo: o lançamento continua na mesma categoria, e valor, data e classificação não
+mudam, então a regra inegociável 4 não é atingida. Fica registrado quem renomeou, quando e o nome
+anterior. A **marcação gasto/receita/ambos não se altera** em categoria em uso, porque isso mudaria
+o relatório. Como a lista fixa do sistema é igual para todas as redes, a rede renomeia só as
+categorias que ela mesma cadastrou. Descartados: proibir renomear em uso (excluir e criar outra
+quebra a série histórica do relatório em duas linhas) e guardar no lançamento o nome da época
+(complexo, e o relatório teria de escolher qual nome exibir).
+
+**A Diretoria oculta categorias da lista fixa, só para a própria rede.** Confirmado em
+2026-09-19. A categoria oculta sai da escolha em lançamentos novos e da sugestão pelo histórico,
+como na exclusão; os lançamentos que já a usam continuam com ela e o relatório segue mostrando-a. A
+Diretoria reexibe quando quiser. Para o sistema e para as outras redes nada muda. Descartados:
+lista fixa sempre inteira (polui a escolha de um campo obrigatório e aumenta o erro de
+classificação) e ocultar por `Empresa` (categoria por `Empresa` já foi descartada).
+
 ### Lista fixa do sistema
 
 Confirmada em 2026-09-18. Igual para todas as redes; cada `GrupoEmpresa` acrescenta as suas.
@@ -162,8 +178,8 @@ Confirmada em 2026-09-18. Igual para todas as redes; cada `GrupoEmpresa` acresce
   original e valor pago no boleto; uma categoria contaria a mesma coisa de dois jeitos.
 - **"Transferência entre empresas da rede"** marca o PIX interno (gasto numa empresa, receita na
   outra), para que o relatório consolidado da rede consiga identificar esse dinheiro, que não saiu
-  da rede. Se o consolidado desconta isso automaticamente é dúvida de relatório — ver
-  [`relatorios.md`](relatorios.md).
+  da rede. No consolidado, ela sai dos totais só quando as duas pontas estão na seleção — ver
+  [`relatorios.md`](relatorios.md), "Transferências entre empresas da rede no consolidado".
 
 ## Obrigatoriedade
 
@@ -478,12 +494,7 @@ lote estiver vigente.
 
 ## Em aberto — a aprofundar depois
 
-Tudo o que estava aberto aqui fechou em 2026-09-18. Surgiram, sem discussão ainda:
-
-- **Renomear categoria em uso.** Renomear muda como o histórico aparece no relatório (os
-  lançamentos antigos passam a exibir o nome novo). Pode renomear, ou só excluir e criar outra?
-- **Ocultar categoria da lista fixa.** Uma rede pode esconder uma categoria do sistema que não
-  usa, ou a lista fixa aparece sempre inteira?
+Nada em aberto desde 2026-09-19.
 
 ## Impacto (a confirmar quando o modelo fechar)
 
