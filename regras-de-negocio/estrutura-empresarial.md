@@ -128,6 +128,14 @@ desligadas por rede), preparado para crescer. No MVP, o único parâmetro é a *
 única** (ver "Caso base", abaixo). Os demais entram à medida que aparecerem, cada um como decisão
 própria registrada aqui.
 
+**O idioma é definido pela rede, com português do Brasil como padrão.** Confirmado em 2026-10-29.
+Todo usuário da rede vê o app e as mensagens do sistema no idioma do `GrupoEmpresa`. Não existe
+escolha de idioma por usuário. **Só o Administrador define e altera o idioma**: ele escolhe ao
+criar o grupo (o padrão é português do Brasil) e é o único que muda depois, como a marcação de
+empresa única. Hoje só existe português do Brasil, então na prática nada muda até haver um
+segundo idioma. Descartados: idioma pelo aparelho ou navegador de cada usuário; preferência salva
+por usuário; e a Diretoria também poder trocar o idioma.
+
 ## Relação com multi-tenancy
 
 Isso é o desenho concreto da decisão de multi-tenancy que estava em aberto no hub
@@ -158,7 +166,9 @@ Nada em aberto por ora.
   cadastro de `Empresa` pela Diretoria é recusado; criação do grupo pelo Administrador com a empresa
   principal quando marcado.
 - `dnzcontrol-app` — precisa carregar configuração visual/funcional a partir do `GrupoEmpresa` do
-  usuário logado.
+  usuário logado, inclusive o idioma.
+- `dnzcontrol-api` — idioma do `GrupoEmpresa` (padrão português do Brasil, alterável só pelo
+  Administrador) define o idioma das mensagens devolvidas ao usuário da rede.
 - `superdiniz-hub/regras/banco-de-dados.md` — modelagem de multi-tenancy por `GrupoEmpresa`.
 - `superdiniz-hub/contexto/arquitetura.md` — mecanismo de white-label (hoje não detalhado no hub).
 - `superdiniz-hub/contexto/decisoes-pendentes.md` #3 — quase toda respondida: desenho de tenant
