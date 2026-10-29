@@ -58,6 +58,17 @@ campo próprio de "dia do vencimento".
 Descartados: mover para o próximo dia útil (exigiria calendário de feriados) e campo próprio de
 dia do mês ou da semana.
 
+**Exceção: opção "vencimento no último dia útil do mês", no recorrente mensal.** Confirmado em
+2026-10-16. Serve sobretudo ao **parcelamento de débito federal** (Simples, Receita ou PGFN), cuja
+parcela vence no último dia útil de cada mês. Com a opção marcada, a data de início só indica o mês
+da primeira parcela, e cada vencimento é o último dia útil do mês, calculado pelo calendário de
+feriados nacionais do Administrador (o mesmo da cobrança federal). Sem a opção, vale a regra acima:
+o vencimento não se move. O parcelamento é cadastrado como recorrente comum, com data de início e
+data de fim, e a empresa pode ter vários. Descartados: item "parcelamento federal" no catálogo
+(dado novo na ligação, que hoje é só liga/desliga, e não atende bem dois parcelamentos ao mesmo
+tempo) e recorrente sem mudança, com dia fixo escolhido pelo usuário (o aviso sai antes do prazo
+real e depende de o usuário conhecer a regra).
+
 ### Quem cadastra
 
 **Quem lança na empresa cadastra, edita e exclui o pagamento recorrente dela.** Confirmado em
@@ -97,7 +108,8 @@ recorrentes criados não se atualizam).
 catálogo, cada cobrança diz se **antecipa** (dia útil anterior) ou **prorroga** (dia útil seguinte)
 quando vence em dia não útil. O sistema usa um **calendário de feriados nacionais mantido pelo
 Administrador**, e o aviso sai na data real do prazo. Isso vale só para a cobrança federal: no
-pagamento recorrente o vencimento não se move. Descartados: não ajustar, como no recorrente (o
+pagamento recorrente o vencimento não se move, salvo a opção "último dia útil do mês" (ver "Como se
+calculam os vencimentos"). Descartados: não ajustar, como no recorrente (o
 aviso "no dia" chegaria depois do prazo quando a regra é antecipar), e sempre antecipar.
 
 **Cobrança que depende de ter empregado nasce desligada.** Confirmado em 2026-09-19. As
@@ -106,6 +118,55 @@ cobranças de folha (ex.: contribuição previdenciária e FGTS) ficam no catál
 empresa tem empregado, como já pode fazer com qualquer cobrança do catálogo. Nenhum dado novo na
 `Empresa`. Descartados: marcação "tem empregados" na `Empresa` (mais um campo de cadastro) e
 ligar a folha para todos (aviso de FGTS para quem não tem empregado).
+
+**No Lucro Real, IRPJ e CSLL nascem desligados.** Confirmado em 2026-10-16. A empresa no Lucro
+Real escolhe entre apuração trimestral e anual por estimativa mensal, e o regime tributário não diz
+qual. Por isso as duas cobranças de IRPJ/CSLL ficam **fora do liga-automático para o Lucro Real**,
+como a folha: quem lança na empresa liga a que se aplica. Enquanto nenhuma das duas estiver ligada,
+a tela de cobranças da empresa **destaca a pendência** ("escolha a apuração de IRPJ/CSLL"). No Lucro
+Presumido, o IRPJ/CSLL trimestral segue ligado pelo regime. Nenhum dado novo na `Empresa`.
+Descartados: campo "forma de apuração" na `Empresa` (mais um campo de cadastro, como na folha) e
+ligar as duas (aviso de uma cobrança que a empresa não paga).
+
+**IRPJ/CSLL trimestral em quotas: a escolha é feita na própria ocorrência.** Confirmado em
+2026-10-16. A lei deixa a empresa pagar o IRPJ/CSLL de cada trimestre em quota única ou em até 3
+quotas (último dia útil dos 3 meses seguintes ao fim do trimestre), escolhendo trimestre a
+trimestre. A 1ª quota vence no mesmo dia da quota única, então o aviso da ocorrência já a cobre. Ao
+**marcar a ocorrência do trimestre como paga**, quem lança na empresa pode indicar **"paguei a 1ª de
+3 quotas"**; o sistema então cria as ocorrências da 2ª e da 3ª quotas, que seguem o ciclo normal
+(avisos, marcar como paga, vencida). Vale onde o IRPJ/CSLL trimestral estiver ligado (Lucro
+Presumido e Lucro Real trimestral). Como a cobrança é só lembrete, sem valor, o sistema não confere
+o mínimo legal das quotas. Descartados: duas cobranças no catálogo, "quota única" e "em 3 quotas"
+(a escolha ficaria fixa, e quem alterna teria de trocar a cobrança ligada a cada trimestre), e só
+quota única no MVP (sem aviso da 2ª e da 3ª quotas).
+
+**Desfazer a marcação da 1ª quota tira a 2ª e a 3ª, se nenhuma delas foi marcada.** Confirmado em
+2026-10-16. Quando a marcação da ocorrência que gerou as quotas é desfeita, as ocorrências da 2ª e
+da 3ª quotas saem da lista ativa, com registro no histórico. Se a 2ª ou a 3ª já estiver marcada como
+paga, o sistema **recusa** e pede para desfazer essas marcações antes, da última para a primeira.
+Assim nunca sobra quota sem a 1ª. Descartados: desfazer em cascata, inclusive marcações já feitas
+nas outras quotas (um clique desfaria várias marcações), e manter as quotas criadas até uma ação
+própria "não vou pagar em quotas" (avisos da 2ª e da 3ª sem a 1ª paga).
+
+**Retenções entram no catálogo, fora do liga-automático.** Confirmado em 2026-10-16. O IRRF retido
+(sobre serviços de outra empresa e sobre aluguel pago a pessoa física) e o PIS/Cofins/CSLL retidos
+de empresa para empresa dependem do que a empresa faz no mês, não do regime tributário. Ficam no
+catálogo como a folha: o regime não os liga, quem lança na empresa liga quando a empresa retém e
+desliga quando deixa de reter. Sem destaque de pendência na tela (muitas empresas não retêm nada) e
+sem campo novo na `Empresa`. **Se a empresa deve reter é decisão do contador**; o sistema só lembra
+o prazo de quem ligou. Limitação conhecida: a cobrança é mensal fixa, então o aviso sai mesmo num
+mês sem retenção. Descartados: ligar pelo regime (aviso para quem não retém) e deixar fora do MVP,
+como pagamento recorrente (o recorrente não antecipa em dia não útil).
+
+**Cobrança anual vinculada à principal.** Confirmado em 2026-10-16. Uma cobrança do catálogo pode
+ser **vinculada** a outra, a principal: ligar a principal liga a vinculada junto, e desligar a
+principal desliga a vinculada. Quem lança na empresa ainda pode desligar só a vinculada. No catálogo
+inicial há dois vínculos: o **saldo do ajuste anual de IRPJ/CSLL** acompanha a **estimativa mensal**
+do Lucro Real, e o **INSS sobre o 13º salário** acompanha a **contribuição previdenciária sobre a
+folha**. Assim a cobrança anual, a mais fácil de esquecer, não depende de alguém lembrar de ligá-la.
+Descartados: itens independentes, ligados um a um (depende de lembrar de uma cobrança que só aparece
+uma vez por ano), e a anual como parte da própria cobrança principal (dois padrões de vencimento
+dentro de um item só).
 
 ### Rascunho do catálogo inicial — A CONFERIR COM O CONTADOR
 
@@ -121,14 +182,19 @@ o contador da empresa principal confere cada linha antes de o catálogo ir para 
 | IRPJ e CSLL — estimativa mensal | Lucro Real anual | último dia útil do mês seguinte | antecipa | Lei 9.430/1996 |
 | Contribuição previdenciária e IRRF sobre folha (DCTFWeb) | todos, se houver empregado | dia 20 do mês seguinte | antecipa | [Receita — DCTFWeb](https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/declaracoes-e-demonstrativos/DCTFWeb) |
 | FGTS (FGTS Digital) | todos, se houver empregado | dia 20 do mês seguinte | antecipa | Lei 8.036/1990, art. 15 |
+| IRRF retido — serviços de PJ e aluguel pago a PF | todos, se houver retenção (fora do liga-automático) | dia 20 do mês seguinte | antecipa | [Agenda Tributária — 20/10/2026](https://www.gov.br/receitafederal/pt-br/assuntos/agenda-tributaria/2026/Outubro/dia-20-10-2026) |
+| Saldo do ajuste anual de IRPJ/CSLL | Lucro Real anual — vinculada à estimativa mensal | último dia útil de março do ano seguinte | antecipa | Lei 9.430/1996, art. 6º, § 1º |
+| INSS sobre o 13º salário | todos, se houver empregado — vinculada à contribuição previdenciária sobre a folha | 20 de dezembro | antecipa | Decreto 3.048/1999, art. 216 (não conferido em fonte oficial) |
+| PIS/Cofins/CSLL retidos de PJ para PJ (CSRF) | todos, se houver retenção (fora do liga-automático) | dia 20 do mês seguinte | antecipa | [Agenda Tributária — 20/10/2026](https://www.gov.br/receitafederal/pt-br/assuntos/agenda-tributaria/2026/Outubro/dia-20-10-2026) |
 
 Observações para a conferência:
 
 - **"Último dia útil do mês" cabe no modelo do catálogo**, sem regra nova: vencimento no último dia
   do mês (que já cai no último dia quando o mês é curto) com "antecipa".
-- **IRPJ/CSLL trimestral pode ser pago em três quotas**; o rascunho só prevê a quota única.
-- **Lucro Real** escolhe entre apuração trimestral e anual por estimativa mensal. O regime
-  tributário da `Empresa` não diz qual das duas, então hoje o sistema ligaria as duas.
+- **IRPJ/CSLL trimestral pode ser pago em três quotas**: a escolha é feita ao marcar a ocorrência
+  como paga (confirmado acima).
+- **Lucro Real** escolhe entre apuração trimestral e anual por estimativa mensal: as duas
+  cobranças de IRPJ/CSLL ficam fora do liga-automático no Lucro Real (confirmado acima).
 - **Folha (DCTFWeb e FGTS)** só se aplica a quem tem empregado: fica fora do liga-automático
   (confirmado acima).
 - No Simples Nacional, a contribuição previdenciária em geral já está no DAS; a exceção de algumas

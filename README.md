@@ -119,7 +119,18 @@ categorias da lista fixa só para a própria rede. `dados-do-lancamento.md` est�
 [`regras-de-negocio/notificacoes.md`](regras-de-negocio/notificacoes.md) resta só o conteúdo
 inicial do catálogo de cobranças federais: há um rascunho com fontes (2026-09-19), **a conferir
 com o contador**. Cobrança de folha (depende de ter empregado) fica fora do liga-automático e nasce
-desligada. O único item restante de `lancamentos.md` (limiar de 75% provisório) depende da escolha
+desligada. Em 2026-10-16, uma pesquisa em fonte oficial conferiu o rascunho, e fechou a primeira
+questão de modelo que não depende do contador: **no Lucro Real, IRPJ e CSLL nascem desligados**
+(trimestral ou estimativa mensal é escolha da empresa), com destaque na tela de cobranças até
+alguém ligar. Fechou também o **IRPJ/CSLL trimestral em quotas**: ao marcar a ocorrência como paga,
+quem lança indica "paguei a 1ª de 3 quotas" e o sistema cria as ocorrências da 2ª e da 3ª.
+Desfazer a marcação da 1ª quota tira a 2ª e a 3ª, recusando se alguma delas já foi marcada.
+As **retenções** (IRRF sobre serviços e aluguel, PIS/Cofins/CSLL retidos) entram no catálogo, fora
+do liga-automático. **Parcelamento** de débito federal é pagamento recorrente comum, com a nova
+opção "vencimento no último dia útil do mês" no recorrente mensal. As cobranças anuais ficam
+**vinculadas à principal** no catálogo: o ajuste anual de IRPJ/CSLL liga com a estimativa mensal, e o
+INSS do 13º com a contribuição previdenciária sobre a folha. Próxima questão: separar INSS e IRRF
+da folha em duas cobranças. O único item restante de `lancamentos.md` (limiar de 75% provisório) depende da escolha
 do leitor de comprovante (decisão pendente #2 do hub).
 
 A lista completa do que segue em aberto está na seção "Em aberto" de cada arquivo de regra.
