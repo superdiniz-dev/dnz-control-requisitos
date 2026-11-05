@@ -168,6 +168,26 @@ Descartados: itens independentes, ligados um a um (depende de lembrar de uma cob
 uma vez por ano), e a anual como parte da própria cobrança principal (dois padrões de vencimento
 dentro de um item só).
 
+**INSS e IRRF da folha são uma cobrança só: o DARF da folha.** Confirmado em 2026-10-31. Desde a
+competência de maio de 2023, a DCTFWeb reúne a contribuição previdenciária e o IRRF da folha num
+único DARF, com vencimento no dia 20 do mês seguinte. A cobrança do catálogo segue o pagamento real:
+uma guia, uma data, uma marcação de paga. Num mês sem IRRF, a guia sai só com o INSS e o lembrete
+continua certo. O INSS sobre o 13º salário segue vinculado a essa cobrança. Descartados: duas
+cobranças separadas (duas marcações para um pagamento só; marcar uma e esquecer a outra deixa uma
+ocorrência "vencida" sem motivo) e uma cobrança só com a marcação informando o que a guia incluiu
+(campo novo sem uso em outra regra; a marcação é só lembrete, não dado financeiro).
+
+**Pró-labore também leva ao DARF da folha; o FGTS segue só com empregado.** Confirmado em
+2026-10-31. A empresa que paga pró-labore aos sócios recolhe INSS (e IRRF, se houver) pela DCTFWeb
+mesmo sem empregado — no Simples Nacional, ao menos a parte retida do sócio. O FGTS não incide
+sobre pró-labore. No catálogo, o DARF da folha vale "se houver empregado ou pró-labore" e o FGTS,
+"se houver empregado". As duas continuam independentes e fora do liga-automático: a empresa só com
+pró-labore liga o DARF e deixa o FGTS desligado. Limitação conhecida: o INSS sobre o 13º salário
+segue vinculado ao DARF da folha, e pró-labore não tem 13º; a empresa só com pró-labore desliga
+esse item à mão. Descartados: vincular o FGTS ao DARF da folha (aviso errado todo mês para quem só
+tem pró-labore) e campos "tem empregado" e "paga pró-labore" na `Empresa` para ligar sozinho
+(cadastro novo a manter atualizado, já descartado para as retenções).
+
 ### Rascunho do catálogo inicial — A CONFERIR COM O CONTADOR
 
 Montado em 2026-09-19 a partir de fontes públicas, **não validado**. Nada aqui é regra confirmada:
@@ -180,11 +200,11 @@ o contador da empresa principal confere cada linha antes de o catálogo ir para 
 | PIS/Pasep e Cofins | Lucro Presumido, Lucro Real | dia 25 do mês seguinte ao fato gerador | antecipa | Lei 11.933/2009 |
 | IRPJ e CSLL — trimestral | Lucro Presumido (e Lucro Real trimestral) | último dia útil do mês seguinte ao fim do trimestre (abril, julho, outubro, janeiro) | antecipa | Lei 9.430/1996 |
 | IRPJ e CSLL — estimativa mensal | Lucro Real anual | último dia útil do mês seguinte | antecipa | Lei 9.430/1996 |
-| Contribuição previdenciária e IRRF sobre folha (DCTFWeb) | todos, se houver empregado | dia 20 do mês seguinte | antecipa | [Receita — DCTFWeb](https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/declaracoes-e-demonstrativos/DCTFWeb) |
+| DARF da folha — INSS e IRRF (DCTFWeb) | todos, se houver empregado ou pró-labore | dia 20 do mês seguinte | antecipa | [Receita — DCTFWeb](https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/declaracoes-e-demonstrativos/DCTFWeb) |
 | FGTS (FGTS Digital) | todos, se houver empregado | dia 20 do mês seguinte | antecipa | Lei 8.036/1990, art. 15 |
 | IRRF retido — serviços de PJ e aluguel pago a PF | todos, se houver retenção (fora do liga-automático) | dia 20 do mês seguinte | antecipa | [Agenda Tributária — 20/10/2026](https://www.gov.br/receitafederal/pt-br/assuntos/agenda-tributaria/2026/Outubro/dia-20-10-2026) |
 | Saldo do ajuste anual de IRPJ/CSLL | Lucro Real anual — vinculada à estimativa mensal | último dia útil de março do ano seguinte | antecipa | Lei 9.430/1996, art. 6º, § 1º |
-| INSS sobre o 13º salário | todos, se houver empregado — vinculada à contribuição previdenciária sobre a folha | 20 de dezembro | antecipa | Decreto 3.048/1999, art. 216 (não conferido em fonte oficial) |
+| INSS sobre o 13º salário | todos, se houver empregado — vinculada ao DARF da folha | 20 de dezembro | antecipa | Decreto 3.048/1999, art. 216 (não conferido em fonte oficial) |
 | PIS/Cofins/CSLL retidos de PJ para PJ (CSRF) | todos, se houver retenção (fora do liga-automático) | dia 20 do mês seguinte | antecipa | [Agenda Tributária — 20/10/2026](https://www.gov.br/receitafederal/pt-br/assuntos/agenda-tributaria/2026/Outubro/dia-20-10-2026) |
 
 Observações para a conferência:
@@ -195,8 +215,8 @@ Observações para a conferência:
   como paga (confirmado acima).
 - **Lucro Real** escolhe entre apuração trimestral e anual por estimativa mensal: as duas
   cobranças de IRPJ/CSLL ficam fora do liga-automático no Lucro Real (confirmado acima).
-- **Folha (DCTFWeb e FGTS)** só se aplica a quem tem empregado: fica fora do liga-automático
-  (confirmado acima).
+- **Folha (DCTFWeb e FGTS)** fica fora do liga-automático: o DARF da folha se aplica a quem tem
+  empregado ou pró-labore, o FGTS só a quem tem empregado (confirmado acima).
 - No Simples Nacional, a contribuição previdenciária em geral já está no DAS; a exceção de algumas
   atividades fica para o contador conferir.
 - Fontes com divergência: há sites que dizem que o DAS "antecipa". A página oficial da agenda do

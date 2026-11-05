@@ -32,6 +32,14 @@ e o "atualizado por". Num lançamento excluído, portanto, "atualizado por" e da
 dizem quem excluiu e quando. Descartado: só contar mudança de conteúdo (exigiria campos próprios de
 "excluído por" e "excluído em").
 
+## Registro criado pelo próprio sistema
+
+**Quando o próprio sistema cria ou altera um registro, o autor é um usuário reservado chamado
+"Sistema".** Confirmado em 2026-10-29. Exemplos: a carga inicial da lista fixa de categorias e
+rotinas automáticas futuras. O "Sistema" só aparece quando a ação é declaradamente do sistema;
+ação de pessoa sempre leva o usuário que agiu. Com isso, **criado por** e **atualizado por**
+nunca ficam vazios. Descartado: deixar a autoria vazia para indicar o sistema.
+
 ## Em aberto — a aprofundar depois
 
 Nada em aberto por ora.

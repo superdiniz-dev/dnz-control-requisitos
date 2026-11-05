@@ -129,8 +129,11 @@ As **retenções** (IRRF sobre serviços e aluguel, PIS/Cofins/CSLL retidos) ent
 do liga-automático. **Parcelamento** de débito federal é pagamento recorrente comum, com a nova
 opção "vencimento no último dia útil do mês" no recorrente mensal. As cobranças anuais ficam
 **vinculadas à principal** no catálogo: o ajuste anual de IRPJ/CSLL liga com a estimativa mensal, e o
-INSS do 13º com a contribuição previdenciária sobre a folha. Próxima questão: separar INSS e IRRF
-da folha em duas cobranças. O único item restante de `lancamentos.md` (limiar de 75% provisório) depende da escolha
+INSS do 13º com a contribuição previdenciária sobre a folha. Em 2026-10-31: **INSS e IRRF da folha
+ficam numa cobrança só, o DARF da folha** (a DCTFWeb gera uma guia única desde maio de 2023).
+O **DARF da folha vale também para quem só paga pró-labore**; o FGTS segue só com empregado (o
+INSS do 13º, vinculado ao DARF, se desliga à mão nesse caso). As questões de modelo do catálogo
+estão fechadas; resta a conferência do conteúdo com o contador. O único item restante de `lancamentos.md` (limiar de 75% provisório) depende da escolha
 do leitor de comprovante (decisão pendente #2 do hub).
 
 A lista completa do que segue em aberto está na seção "Em aberto" de cada arquivo de regra.
