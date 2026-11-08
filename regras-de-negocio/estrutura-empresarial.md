@@ -13,8 +13,10 @@
   enxerga as empresas às quais foi atribuído, não a rede inteira.
 - A **Diretoria** enxerga **todas** as `Empresa` da sua rede automaticamente, sem precisar de
   atribuição empresa a empresa.
-- **Cada usuário externo pertence a exatamente um `GrupoEmpresa`** — não há Gerente nem Diretoria
-  compartilhado entre redes diferentes. Confirmado em 2026-09-11.
+- **Um usuário externo pode pertencer a mais de um `GrupoEmpresa`**, e escolhe a rede no login
+  (pulado quando só tem uma). Revisto em 2026-11-06; antes, em 2026-09-11, tinha se confirmado que
+  não havia Gerente nem Diretoria compartilhado entre redes. Detalhe em
+  [`papeis-e-hierarquia.md`](papeis-e-hierarquia.md), "Login e identificação".
 - **`Empresa` não migra de `GrupoEmpresa`** — o vínculo é fixo desde a criação. Confirmado em
   2026-09-11.
 - **Toda `Empresa` tem CNPJ, obrigatório e único dentro da rede.** Confirmado em 2026-09-18. É por
@@ -46,6 +48,9 @@
 - **Exceção: rede de empresa única.** Quando o `GrupoEmpresa` é de uma empresa só (o caso base,
   abaixo), **a empresa principal já vem cadastrada pelo Administrador**, junto com o grupo e a
   primeira Diretoria. Confirmado em 2026-09-18.
+- **No MVP, essa criação é uma operação interna, sem tela**, assim como a alteração das marcações
+  da rede. Confirmado em 2026-11-08. Ver [`papeis-e-hierarquia.md`](papeis-e-hierarquia.md), "Login
+  e identificação".
 
 - **A `Empresa` pode informar o regime tributário** (MEI, Simples Nacional, Lucro Presumido ou
   Lucro Real). Confirmado em 2026-09-18. É por ele que o sistema liga as cobranças federais padrão
@@ -121,6 +126,9 @@ O domínio próprio (ex.: `financeiro.superdiniz.com.br`) é uma opção ligada 
 disponível no MVP: na web, custa bem menos que um app na loja. Descartados: domínio obrigatório
 (o cadastro da rede dependeria de o cliente ter e configurar um domínio) e domínio só depois do
 MVP.
+
+**No domínio próprio, o endereço já define a rede**, sem escolha de rede no login. Confirmado em
+2026-11-08. Ver [`papeis-e-hierarquia.md`](papeis-e-hierarquia.md), "Login e identificação".
 
 **Parâmetros funcionais: o mecanismo nasce pronto, com um parâmetro só.** Confirmado em
 2026-09-18. O `GrupoEmpresa` tem um conjunto de parâmetros funcionais (funcionalidades ligadas ou

@@ -26,7 +26,12 @@ relacionada, mas não é a mesma coisa: retenção é *por quanto tempo* guardar
   inativos das empresas a que está atribuído, e perde tudo de uma empresa, ativos e inativos, ao
   perder a atribuição). Confirmado em 2026-09-18 — abrir mais visibilidade seria furo na regra
   inegociável 1 do hub.
-- **Usuário excluído logicamente perde o login imediatamente.** Confirmado em 2026-09-11.
+- **Usuário excluído logicamente perde o login imediatamente.** Confirmado em 2026-09-11. Revisto
+  em 2026-11-06, com o usuário em mais de uma rede: excluir numa rede tira na hora o acesso
+  **àquela rede**; o login só cai quando não sobra vínculo ativo, ou quando o Administrador exclui
+  a pessoa. O usuário de papel externo que fica com zero vínculos ativos passa a inativo
+  (confirmado em 2026-11-08). Ver [`papeis-e-hierarquia.md`](papeis-e-hierarquia.md), "Login e
+  identificação".
 
 ## Reativação
 

@@ -15,7 +15,26 @@ verdade para a visão de produto e regras de negócio em si, mesmo depois de mad
 
 ## Onde paramos — retomar aqui na próxima sessão
 
-**Última sessão: 2026-09-18 (virou 19).** Fechamos todo o "Em aberto" de
+**A próxima sessão começa por aqui:** usuário em mais de uma rede. Em 2026-11-06, a regra "cada
+usuário externo pertence a exatamente um `GrupoEmpresa`" foi revista, e
+[`regras-de-negocio/papeis-e-hierarquia.md`](regras-de-negocio/papeis-e-hierarquia.md) ganhou a
+seção "Login e identificação": e-mail único no sistema, uma senha por pessoa, escolha da rede no
+login (pulada com uma rede só), papel externo por rede e papel interno da pessoa, exclusão por
+vínculo, Administrador com acesso a todas as redes e painel acima das redes fora do MVP. Em
+2026-11-08: quem é Administrador e também tem vínculo com uma rede **escolhe no login como vai
+atuar**, e o histórico registra em qual dos dois agiu; e **criar uma rede e alterar as marcações
+dela é operação interna, sem tela, no MVP**; e **para mudar de rede, a pessoa sai e entra de
+novo**. A **entrada numa rede é sempre por convite**, igual para quem é novo e para quem já tem
+usuário, sem revelar outra rede. **Nome e e-mail só a própria pessoa e o Administrador alteram**, e
+o **usuário externo com zero vínculos ativos passa a inativo**, voltando sozinho ao ter um vínculo
+ativo. No domínio próprio, **o endereço já define a rede**, sem escolha no login. As dúvidas dessa
+revisão estão fechadas. A tradução técnica está no ADR 0010 do `superdiniz-hub`, aceito em
+2026-11-08. **Várias redes em produção ficam fora do MVP**, com a base já pronta para abrir depois
+sem alterar as entidades, se possível.
+
+Os registros abaixo são das sessões anteriores.
+
+**Sessão de 2026-09-18 (virou 19).** Fechamos todo o "Em aberto" de
 [`regras-de-negocio/dados-do-lancamento.md`](regras-de-negocio/dados-do-lancamento.md) e boa parte
 do de [`regras-de-negocio/lancamentos.md`](regras-de-negocio/lancamentos.md):
 
@@ -111,7 +130,7 @@ Em [`regras-de-negocio/notificacoes.md`](regras-de-negocio/notificacoes.md) (nov
   empresa, a qualquer momento, com histórico de quem marcou e desmarcou. Na própria central, cada
   usuário tem **lida/não lida** (com contador) e **dispensar**, só para si.
 
-**A próxima sessão começa por aqui:** o ciclo da notificação fechou em
+**Catálogo de cobranças federais e pontas soltas (até 2026-10-31):** o ciclo da notificação fechou em
 2026-09-19. Também fecharam as pontas soltas de categoria em
 [`regras-de-negocio/dados-do-lancamento.md`](regras-de-negocio/dados-do-lancamento.md): renomear
 categoria em uso vale para todo o histórico, sem mudar a marcação de tipo, e a Diretoria oculta
