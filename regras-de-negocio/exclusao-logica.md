@@ -11,6 +11,12 @@ no contexto de exclusão de usuário (papel), mas nasce com vocação de valer p
 avança). Mecanismo concreto: o campo **Status** (ativo/inativo) da
 [entidade base](entidade-base.md), que toda entidade do sistema herda.
 
+> **Nota (2026-11-12, `BE-0002`):** as tabelas técnicas do login — claims, logins externos e
+> tokens do login — não são "registro" no sentido desta regra. Elas não guardam histórico
+> financeiro, autoria nem dado de negócio: são detalhe interno do mecanismo de login, e o próprio
+> login apaga e recria essas linhas. Por isso podem ser apagadas fisicamente. A pessoa, o usuário,
+> continua sujeita à regra: excluir a pessoa é sempre lógico.
+
 **Por quê:** auditoria (histórico de quem existiu/agiu no sistema não pode sumir) e conformidade
 com a LGPD (guarda de dado, rastreabilidade — decisão pendente #12 do hub sobre retenção segue
 relacionada, mas não é a mesma coisa: retenção é *por quanto tempo* guardar, exclusão lógica é
