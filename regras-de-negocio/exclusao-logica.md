@@ -7,9 +7,9 @@
 **Nenhum registro é fisicamente apagado do sistema.** Toda "exclusão" é lógica — o registro é
 marcado como excluído/inativo, mas permanece no banco. Confirmado como regra geral em 2026-09-11,
 no contexto de exclusão de usuário (papel), mas nasce com vocação de valer para o domínio inteiro
-(comprovante, lançamento, relatório, empresa, grupo — a confirmar caso a caso conforme o brainstorm
-avança). Mecanismo concreto: o campo **Status** (ativo/inativo) da
-[entidade base](entidade-base.md), que toda entidade do sistema herda.
+(comprovante, lançamento, relatório, empresa — a confirmar caso a caso conforme o brainstorm
+avança; para o `GrupoEmpresa`, confirmado em 2026-11-13). Mecanismo concreto: o campo **Status**
+(ativo/inativo) da [entidade base](entidade-base.md), que toda entidade do sistema herda.
 
 > **Nota (2026-11-12, `BE-0002`):** as tabelas técnicas do login — claims, logins externos e
 > tokens do login — não são "registro" no sentido desta regra. Elas não guardam histórico
@@ -32,6 +32,11 @@ relacionada, mas não é a mesma coisa: retenção é *por quanto tempo* guardar
   inativos das empresas a que está atribuído, e perde tudo de uma empresa, ativos e inativos, ao
   perder a atribuição). Confirmado em 2026-09-18 — abrir mais visibilidade seria furo na regra
   inegociável 1 do hub.
+- **Rede excluída fica inacessível para todos, inclusive para o Administrador.** Confirmado em
+  2026-11-13. Os vínculos dela deixam de aparecer para a pessoa, inclusive na escolha de rede, e a rede
+  só volta pela reativação, que é operação interna. Ver
+  [`estrutura-empresarial.md`](estrutura-empresarial.md), "Modelo". Descartado: rede inativa
+  continuar visível ou acessível.
 - **Usuário excluído logicamente perde o login imediatamente.** Confirmado em 2026-09-11. Revisto
   em 2026-11-06, com o usuário em mais de uma rede: excluir numa rede tira na hora o acesso
   **àquela rede**; o login só cai quando não sobra vínculo ativo, ou quando o Administrador exclui
@@ -46,6 +51,9 @@ relacionada, mas não é a mesma coisa: retenção é *por quanto tempo* guardar
 - **Dado de conta** (usuário, `Empresa`, categoria…) **pode ser reativado.** Recriar partiria a
   identidade: um funcionário que sai e volta viraria outro usuário, e o histórico de quem lançou o
   quê ficaria dividido; uma empresa reaberta perderia a ligação com os próprios lançamentos.
+- **O `GrupoEmpresa` (a rede) também é dado de conta: a exclusão é lógica e ele pode ser
+  reativado** por quem pode excluí-lo, o Administrador, por operação interna. Confirmado em
+  2026-11-13. Descartado: rede sem reativação.
 - **Dado financeiro** (lançamento, cadeia de estorno, `LoteLancamentos`, comprovante) **não é
   reativado.** Excluído por engano, registra-se de novo — o excluído não bloqueia o ID da
   transação nem o arquivo. Reativar esbarraria em cadeia, lote, checagem de ID e arquivo liberado;

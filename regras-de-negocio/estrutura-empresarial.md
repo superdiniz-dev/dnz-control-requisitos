@@ -5,6 +5,17 @@
 ## Modelo
 
 - **`GrupoEmpresa`** — a rede. Contém uma ou mais `Empresa`.
+- **Todo `GrupoEmpresa` tem nome, obrigatório e sem exigência de ser único.** Confirmado em
+  2026-11-13. Descartado: nome único.
+- **Excluir o `GrupoEmpresa` é só do Administrador, por operação interna**, assim como a
+  reativação. Confirmado em 2026-11-13.
+- **O `GrupoEmpresa` excluído pode ser reativado** por quem pode excluí-lo, o Administrador, por
+  operação interna. Confirmado em 2026-11-13. Ver [`exclusao-logica.md`](exclusao-logica.md),
+  "Reativação".
+- **O `GrupoEmpresa` excluído não é acessado por ninguém, nem pelo Administrador.** Confirmado em
+  2026-11-13. Enquanto a rede está excluída, nenhum usuário entra nela, e os vínculos dela não
+  aparecem para a pessoa, nem na escolha de rede. Ela só volta pela reativação, que é operação
+  interna. Descartado: rede inativa continuar visível ou acessível.
 - **`Empresa`** — uma empresa individual dentro da rede; é onde vivem os lançamentos, comprovantes
   e relatórios financeiros.
 - Um `GrupoEmpresa` tem um proprietário: o papel **Diretoria** — ver
