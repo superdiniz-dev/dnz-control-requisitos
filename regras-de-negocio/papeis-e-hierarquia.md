@@ -52,6 +52,9 @@ Depois de entrar com e-mail e senha, o usuário escolhe em qual `GrupoEmpresa` v
 uma rede só, a escolha é pulada** e o usuário entra direto nela, sem ver a ideia de rede (ver
 [`estrutura-empresarial.md`](estrutura-empresarial.md), "Caso base").
 
+**Não há limite de redes por pessoa.** Confirmado em 2026-11-24 (QA do BE-0003). A pessoa pode ter
+vínculo com quantas redes for preciso, um vínculo por rede. O MVP opera com uma rede só.
+
 **Papel externo é por rede; papel interno é da pessoa.** Confirmado em 2026-11-06. Cada vínculo da
 pessoa com um `GrupoEmpresa` tem o próprio papel externo (Diretoria ou Gerente) e, no Gerente, as
 próprias `Empresa` atribuídas. Quem define é a Diretoria daquela rede, sem efeito nenhum nas

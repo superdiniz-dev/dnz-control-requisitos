@@ -7,6 +7,9 @@
 - **`GrupoEmpresa`** — a rede. Contém uma ou mais `Empresa`.
 - **Todo `GrupoEmpresa` tem nome, obrigatório e sem exigência de ser único.** Confirmado em
   2026-11-13. Descartado: nome único.
+- **Nome vazio ou só com espaços conta como não informado e é recusado.** Confirmado em
+  2026-11-24 (QA do BE-0003). A recusa é de quem cria ou renomeia a rede (BE-0004, depois
+  HU-0002). Descartado: aceitar nome em branco.
 - **Excluir o `GrupoEmpresa` é só do Administrador, por operação interna**, assim como a
   reativação. Confirmado em 2026-11-13.
 - **O `GrupoEmpresa` excluído pode ser reativado** por quem pode excluí-lo, o Administrador, por
